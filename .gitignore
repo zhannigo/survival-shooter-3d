@@ -1,0 +1,24 @@
+# Add any directories, files, or patterns you don't want to be tracked by version control
+survival-shooter-3d/survival-shooter-3d/.vs
+
+survival-shooter-3d/survival-shooter-3d/Temp
+
+survival-shooter-3d/survival-shooter-3d/Library
+survival-shooter-3d/survival-shooter-3d/.idea
+survival-shooter-3d/survival-shooter-3d/Assembly-CSharp.csproj
+survival-shooter-3d/survival-shooter-3d/Assembly-CSharp-Editor.csproj
+survival-shooter-3d/survival-shooter-3d/survival-shooter-3d.sln
+survival-shooter-3d/survival-shooter-3d/survival-shooter-3d.csproj
+survival-shooter-3d/survival-shooter-3d/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll
+
+survival-shooter-3d/survival-shooter-3d/obj
+
+.vs
+/builds
+survival-shooter-3d/survival-shooter-3d/Assets/Plugins/Editor/JetBrains
+
+*.csproj
+
+# Build related
+Cake/tools/**
+Cake/!tools/packages.config

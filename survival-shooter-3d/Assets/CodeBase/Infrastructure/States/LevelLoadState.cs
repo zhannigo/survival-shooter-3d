@@ -1,8 +1,10 @@
 using System;
 using CodeBase.Cameralogic;
+using CodeBase.Infrastructure.AssetManager;
+using CodeBase.Infrastructure.Factory;
 using CodeBase.Logic;
 using UnityEngine;
-using static CodeBase.Infrastructure.GameFactory;
+using static CodeBase.Infrastructure.Factory.GameFactory;
 using Object = UnityEngine.Object;
 
 namespace CodeBase.Infrastructure
@@ -14,7 +16,7 @@ namespace CodeBase.Infrastructure
     private readonly GameStateMachine _stateMachine;
     private readonly SceneLoader _sceneLoader;
     private readonly LoadingCurtain _curtain;
-    private readonly GameFactory _gameFactory = new GameFactory();
+    private readonly GameFactory _gameFactory;
 
     public LevelLoadState(GameStateMachine stateMachine, SceneLoader sceneLoader, LoadingCurtain curtain)
     {

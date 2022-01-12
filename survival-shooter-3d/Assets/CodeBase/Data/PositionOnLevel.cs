@@ -1,5 +1,8 @@
+using System;
+
 namespace CodeBase.Data
 {
+  [Serializable]
   public class PositionOnLevel
   {
     public string Level;
@@ -9,6 +12,11 @@ namespace CodeBase.Data
     {
       Level = level;
       Position = position;
+    }
+
+    public PositionOnLevel(string initialLevel)
+    {
+      Level = initialLevel;
     }
   }
 }

@@ -1,13 +1,9 @@
-using System;
 using CodeBase.Cameralogic;
-using CodeBase.Infrastructure.AssetManager;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Logic;
 using UnityEngine;
-using static CodeBase.Infrastructure.Factory.GameFactory;
-using Object = UnityEngine.Object;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.States
 {
   public class LevelLoadState:IPayLoadedState<string>
 
@@ -16,10 +12,11 @@ namespace CodeBase.Infrastructure
     private readonly GameStateMachine _stateMachine;
     private readonly SceneLoader _sceneLoader;
     private readonly LoadingCurtain _curtain;
-    private readonly GameFactory _gameFactory;
+    private readonly IGameFactory _gameFactory;
 
-    public LevelLoadState(GameStateMachine stateMachine, SceneLoader sceneLoader, LoadingCurtain curtain)
+    public LevelLoadState(GameStateMachine stateMachine, SceneLoader sceneLoader, LoadingCurtain curtain, IGameFactory gameFactory)
     {
+      _gameFactory = gameFactory;
       _stateMachine = stateMachine;
       _sceneLoader = sceneLoader;
       _curtain = curtain;
@@ -28,17 +25,22 @@ namespace CodeBase.Infrastructure
     public void Enter(string sceneName)
     {
       _curtain.Show();
+      _gameFactory.Cleanup();
       _sceneLoader.Load(sceneName, OnLoaded);
     }
 
     private void OnLoaded()
     {
-      var initialPoint = GameObject.FindWithTag(InitialpointTag);
-      GameObject hero = _gameFactory.HeroCreate(initialPoint);
+      InitialGameWorld();
+
+      _stateMachine.Enter<GameLoopState>();
+    }
+
+    private void InitialGameWorld()
+    {
+      GameObject hero = _gameFactory.HeroCreate(GameObject.FindWithTag(InitialpointTag));
       _gameFactory.CreateHub();
       CameraFollow(hero);
-      
-      _stateMachine.Enter<GameLoopState>();
     }
 
     private void CameraFollow(GameObject hero) =>

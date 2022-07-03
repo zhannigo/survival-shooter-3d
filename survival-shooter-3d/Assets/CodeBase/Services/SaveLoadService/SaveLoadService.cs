@@ -1,5 +1,6 @@
 using CodeBase.Data;
 using CodeBase.Hero;
+using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Services.PersistentProgress;
 using UnityEngine;
@@ -26,8 +27,7 @@ namespace CodeBase.Services.SaveLoadService
       }
       PlayerPrefs.SetString(ProgressKey,_progressService.Progress.ToJson());
     }
-    public PlayerProgress LoadProgress() =>
-      PlayerPrefs.GetString(ProgressKey)?.
-        ToDeserialized<PlayerProgress>();
+    public PlayerProgress LoadProgress() => 
+        PlayerPrefs.GetString(ProgressKey)?.ToDeserialized<PlayerProgress>();
   }
 }

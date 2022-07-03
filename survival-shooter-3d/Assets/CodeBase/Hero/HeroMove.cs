@@ -31,8 +31,8 @@ namespace CodeBase.Hero
         movementVector = _camera.transform.TransformDirection(_inputService.Axis);
         movementVector.Normalize();
         transform.forward = movementVector;
-        Quaternion transformRotation = transform.rotation;
-        transformRotation.x = 0;
+        transform.eulerAngles = new Vector3 (0, transform.eulerAngles.y, 0);
+
       }
       movementVector += Physics.gravity;
       _characterController.Move(MovementSpeed * movementVector * Time.deltaTime);
@@ -58,8 +58,8 @@ namespace CodeBase.Hero
 
     private void Warp(Vector3Data to)
     {
-      _characterController.enabled = false; 
-      transform.position = to.AsUnityVector();
+      _characterController.enabled = false;
+      transform.position = to.AsUnityVector().AddY(_characterController.height);
       _characterController.enabled = true;
     }
 

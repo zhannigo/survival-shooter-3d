@@ -5,8 +5,8 @@ namespace CodeBase.Data
   [Serializable]
   public class State
   {
-    public int CurrentHP;
-    public int MaxHP;
+    public float CurrentHP;
+    public float MaxHP;
 
     public void ReturnHp() => CurrentHP = MaxHP;
   }

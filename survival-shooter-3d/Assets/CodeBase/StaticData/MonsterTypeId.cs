@@ -1,5 +1,8 @@
-public enum MonsterTypeId
+namespace CodeBase.StaticData
 {
-  Friendly = 0,
-  Angry = 10
+  public enum MonsterTypeId
+  {
+    Friendly = 0,
+    Angry = 10,
+  }
 }

@@ -1,6 +1,6 @@
 using CodeBase.Data;
 
-namespace CodeBase.Hero
+namespace CodeBase.Infrastructure
 {
   public interface ISavedProgressReader
   {

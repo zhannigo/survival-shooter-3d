@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace CodeBase.Logic
 {
   public interface IAnimationStateReader

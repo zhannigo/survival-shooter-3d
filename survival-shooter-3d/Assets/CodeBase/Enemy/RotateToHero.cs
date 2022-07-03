@@ -1,5 +1,3 @@
-using CodeBase.Infrastructure.Factory;
-using CodeBase.Infrastructure.Services;
 using UnityEngine;
 
 namespace CodeBase.Enemy
@@ -7,20 +5,11 @@ namespace CodeBase.Enemy
   public class RotateToHero:MonoBehaviour
   {
     private Transform _heroTransform;
-    private IGameFactory _gameFactory;
     private Vector3 _positionToLook;
     public float _speed;
 
-    private void Start()
-    {
-      _gameFactory = AllServices.Container.Single<IGameFactory>();
-      if (HeroExist())
-        InitializeHeroTransform();
-      else
-      {
-        _gameFactory.HeroCreated += InitializeHeroTransform;
-      }
-    }
+    public void Construct(Transform heroTransform) => 
+      _heroTransform = heroTransform;
 
     private void Update()
     {
@@ -30,12 +19,6 @@ namespace CodeBase.Enemy
         transform.rotation = SmoothedRotation(transform.rotation, _positionToLook);
       }
     }
-
-    private bool HeroExist() => 
-      _gameFactory.HeroGameObject != null;
-
-    private void InitializeHeroTransform() => 
-      _heroTransform = _gameFactory.HeroGameObject.transform;
 
     private bool Initialized()
     {

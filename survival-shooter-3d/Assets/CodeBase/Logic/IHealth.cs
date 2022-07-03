@@ -1,6 +1,6 @@
 using System;
 
-namespace CodeBase.Enemy
+namespace CodeBase.Logic
 {
   public interface IHealth
   {

@@ -6,24 +6,33 @@ namespace CodeBase.Hero
   [RequireComponent(typeof(HeroHealth))]
   public class HeroDeath : MonoBehaviour
   {
-    private HeroHealth _heroHealth;
-    private HeroMove
+    public HeroHealth _heroHealth;
+    public HeroMove _heroMove;
+    public HeroAnimator _heroAnimator;
+    public HeroAttack _heroAttack;
+    public GameObject DeathFx;
+    private bool _isDead = false;
 
     private void OnDestroy() => 
-        _heroHealth.healthChanged -= HealthChanged;
+        _heroHealth.HealthChanged -= HealthChanged;
 
     private void Start() => 
-        _heroHealth.healthChanged += HealthChanged;
+        _heroHealth.HealthChanged += HealthChanged;
 
     private void HealthChanged()
     {
-      if (_heroHealth.Current <= 0)
+      if (!_isDead && _heroHealth.CurrentHp <= 0)
         Die();
     }
 
     private void Die()
     {
-      throw new NotImplementedException();
+      _isDead = true;
+      _heroMove.enabled = false;
+      _heroAttack.enabled = false;
+      _heroAnimator.PlayDeath();
+
+      Instantiate(DeathFx, transform.position, Quaternion.identity);
     }
   }
 }

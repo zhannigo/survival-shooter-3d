@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using CodeBase.Hero;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Logic;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.SaveLoadService;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -19,8 +19,8 @@ namespace CodeBase.Infrastructure.States
       _states = new Dictionary<Type, IExitableState>
       {
         [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
-        [typeof(LevelLoadState)] = new LevelLoadState(this, sceneLoader,curtain, services.Single<IGameFactory>()),
-        [typeof(LoadProgressState)]= new LoadProgressState(this,services.Single<IPersistentProgressService>(),services.Single<ISaveLoadService>()),
+        [typeof(LevelLoadState)] = new LevelLoadState(this, sceneLoader, curtain, services.Single<IGameFactory>(), services.Single<IPersistentProgressService>()),
+        [typeof(LoadProgressState)] = new LoadProgressState(this, services.Single<IPersistentProgressService>(), services.Single<ISaveLoadService>()),
         [typeof(GameLoopState)] = new GameLoopState(this)
       };
     }
@@ -36,18 +36,19 @@ namespace CodeBase.Infrastructure.States
       TState state = ChangeState<TState>();
       state.Enter(payLoad);
     }
-    
+
     private TState ChangeState<TState>() where TState : class, IExitableState
     {
       _activeState?.Exit();
-      
+
       TState state = GetState<TState>();
       _activeState = state;
-      
+
       return state;
     }
 
-    private TState GetState<TState>() where TState : class, IExitableState => 
+    private TState GetState<TState>() where TState : class, IExitableState =>
       _states[typeof(TState)] as TState;
   }
+
 }

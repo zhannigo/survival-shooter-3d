@@ -6,6 +6,7 @@ TagManager:
   tags:
   - LoadingCurtain
   - InitialPoint
+  - EnemySpawner
   layers:
   - Default
   - TransparentFX
@@ -19,10 +20,10 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - AggroZone
+  - AttackZone
+  - Hittable
   - 
   - 
   - 

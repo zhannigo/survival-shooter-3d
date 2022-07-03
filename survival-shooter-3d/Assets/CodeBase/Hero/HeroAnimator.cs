@@ -37,7 +37,7 @@ namespace CodeBase.Hero
     
     public void PlayAttack() => Animator.SetTrigger(AttackHash);
 
-    public void PlayDeath() =>  Animator.SetTrigger(DieHash);
+    public void PlayDeath() => Animator.SetTrigger(DieHash);
 
     public void ResetToIdle() => Animator.Play(_idleStateHash, -1);
     
@@ -48,7 +48,7 @@ namespace CodeBase.Hero
     }
 
     public void ExitedState(int stateHash) =>
-      StateExited?.Invoke(StateFor(stateHash));
+        StateExited?.Invoke(StateFor(stateHash));
     
     private AnimatorState StateFor(int stateHash)
     {

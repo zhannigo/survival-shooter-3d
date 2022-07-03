@@ -1,4 +1,4 @@
-using CodeBase.Hero;
+using CodeBase.Logic;
 using UnityEngine;
 
 namespace CodeBase.UI
@@ -6,11 +6,20 @@ namespace CodeBase.UI
   public class ActorUI : MonoBehaviour
   {
     public HpBar HpBar;
-    public HeroHealth HeroHealth;
+    private IHealth _health;
 
-    private void HealthUpdate()
+    public void Construct(IHealth health)
     {
-      HpBar.SetValue(HeroHealth.Current, HeroHealth.Max);
+      _health = health;
+      _health.HealthChanged += UpdateBar;
+    }
+
+    public void OnDestroy() => 
+        _health.HealthChanged -= UpdateBar;
+
+    private void UpdateBar()
+    {
+      HpBar.SetValue(_health.CurrentHp, _health.MaxHp);
     }
   }
 }

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 958f42eb2b4845fb88f48c9c9d821bfd, type: 3}
+  m_Name: Friendly
+  m_EditorClassIdentifier: 
+  MonsterType: 0
+  maxValue: 3
+  minValue: 1
+  Health: 2
+  MoveSpeed: 4
+  Damage: 5
+  AttackCooldown: 3
+  Cleavage: 0.5
+  EffectiveDistance: 0.5
+  Prefab: {fileID: 4961821660095034203, guid: 32bf89218560c534da8659e6da74ffcf, type: 3}

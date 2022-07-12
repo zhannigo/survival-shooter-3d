@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcc4d58a47224f54acacbb2c045bef80, type: 3}
+  m_Name: Level01
+  m_EditorClassIdentifier: 
+  LevelKey: Main
+  Spawners:
+  - _id: Main_a5b28040-2204-4214-b463-a1ab5f568dd8
+    _monsterType: 0
+    _position: {x: -7.49, y: 0, z: -2.7}
+  - _id: Main_dc8ec4f4-736e-4fc0-9016-013ec7e732c0
+    _monsterType: 10
+    _position: {x: 4.31, y: 0, z: 10.79}
+  - _id: Main_22e80f64-cab5-4473-bd87-4e12b307f649
+    _monsterType: 0
+    _position: {x: 1.08, y: 0, z: 0.63}

@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using CodeBase.Infrastructure.Services;
 
 namespace CodeBase.StaticData
@@ -6,5 +8,6 @@ namespace CodeBase.StaticData
   {
     void LoadMonsters();
     MonsterStaticData ForMonster(MonsterTypeId monsterType);
+    LevelStaticData ForLevel(string levelKey);
   }
 }

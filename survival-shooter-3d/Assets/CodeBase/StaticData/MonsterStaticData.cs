@@ -6,6 +6,8 @@ namespace CodeBase.StaticData
   public class MonsterStaticData : ScriptableObject
   {
     public MonsterTypeId MonsterType;
+    [Range(0,30)] public int maxValue;
+    [Range(0,10)] public int minValue;
     [Range(1, 50)] public int Health;
     [Range(1, 10)] public float MoveSpeed = 4f;
     [Range(1, 30)] public float Damage = 10f;

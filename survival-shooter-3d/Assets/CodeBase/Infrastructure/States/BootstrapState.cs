@@ -2,10 +2,14 @@ using CodeBase.Data;
 using CodeBase.Infrastructure.AssetManager;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services;
+using CodeBase.Services;
 using CodeBase.Services.Input;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.SaveLoadService;
+using CodeBase.Services.StaticData;
 using CodeBase.StaticData;
+using CodeBase.UI.Factory;
+using CodeBase.UI.Services;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
@@ -39,16 +43,30 @@ namespace CodeBase.Infrastructure.States
     private void RegisterServices()
     {
       _services.RegisterSingle<IInputService>(InputService());
-      _services.RegisterSingle<IAssets>(new AssetProvider());
+      _services.RegisterSingle<IGameStateMachine>(_stateMachine);
+      RegisterAssetProvider();
       IStaticDataService staticData = RegisterStaticData();
       IRandomService randomService = new UnityRandomService();
       
       _services.RegisterSingle(randomService);
       IPersistentProgressService progressService = new PersistentProgressService();
-      _services.RegisterSingle<IPersistentProgressService>(progressService);
-      _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssets>(), staticData, randomService, progressService));
+      _services.RegisterSingle(progressService);
+
+      _services.RegisterSingle<IAdsService>(new AdsService());
+      _services.RegisterSingle<IUIFactory>(new UIFactory(_services.Single<IAssets>(), staticData, progressService, _services.Single<IAdsService>()));
+      _services.RegisterSingle<IWindowService>(new WindowService(_services.Single<IUIFactory>()));
+
+      _services.RegisterSingle<IGameFactory>(new GameFactory
+        (_services.Single<IAssets>(), staticData, randomService, progressService, _services.Single<IWindowService>()));
       _services.RegisterSingle<ISaveLoadService>(new SaveLoadService
         (_services.Single<IPersistentProgressService>(),_services.Single<IGameFactory>()));
+    }
+
+    private void RegisterAssetProvider()
+    {
+      AssetProvider assetProvider = new AssetProvider();
+      assetProvider.Initialize();
+      _services.RegisterSingle<IAssets>(assetProvider);
     }
 
     private IStaticDataService RegisterStaticData()

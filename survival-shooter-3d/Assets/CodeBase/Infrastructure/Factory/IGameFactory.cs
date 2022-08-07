@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using CodeBase.Enemy;
 using CodeBase.Hero;
 using CodeBase.Infrastructure.Services;
@@ -11,11 +12,12 @@ namespace CodeBase.Infrastructure.Factory
   {
     List<ISavedProgressReader> ProgressReaders { get; }
     List<ISavedProgress> ProgressWriters { get; }
-    GameObject HeroCreate(GameObject at);
-    GameObject CreateHud();
-    void CreateSpawner(Vector3 at, MonsterTypeId monsterType, string spawnerID);
+    Task<GameObject> HeroCreate(Vector3 at);
+    Task<GameObject> CreateHud();
+    Task CreateSpawner(Vector3 at, MonsterTypeId monsterType, string spawnerID);
     void Cleanup();
-    GameObject CreateMonster(MonsterTypeId monsterType, Transform parent);
-    LootPiece CreateLoot(Vector3 transformPosition);
+    Task<GameObject> CreateMonster(MonsterTypeId monsterType, Transform parent);
+    Task<LootPiece> CreateLoot(Vector3 transformPosition);
+    void WarmUp();
   }
 }

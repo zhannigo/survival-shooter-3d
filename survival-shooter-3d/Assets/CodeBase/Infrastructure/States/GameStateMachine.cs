@@ -5,12 +5,14 @@ using CodeBase.Infrastructure.Services;
 using CodeBase.Logic;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.SaveLoadService;
+using CodeBase.Services.StaticData;
 using CodeBase.StaticData;
+using CodeBase.UI.Factory;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
 {
-  public class GameStateMachine
+  public class GameStateMachine : IGameStateMachine
   {
     private readonly Dictionary<Type, IExitableState> _states;
     private IExitableState _activeState;
@@ -21,7 +23,7 @@ namespace CodeBase.Infrastructure.States
       {
         [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
         [typeof(LevelLoadState)] = new LevelLoadState(this, sceneLoader, curtain, services.Single<IGameFactory>(), 
-          services.Single<IPersistentProgressService>(), services.Single<IStaticDataService>()),
+          services.Single<IPersistentProgressService>(), services.Single<IStaticDataService>(), services.Single<IUIFactory>()),
         [typeof(LoadProgressState)] = new LoadProgressState(this, 
           services.Single<IPersistentProgressService>(), services.Single<ISaveLoadService>()),
         [typeof(GameLoopState)] = new GameLoopState(this)

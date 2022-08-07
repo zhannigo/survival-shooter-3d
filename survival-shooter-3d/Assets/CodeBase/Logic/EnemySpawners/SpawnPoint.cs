@@ -26,9 +26,9 @@ namespace CodeBase.Logic.EnemySpawners
         Spawn();
       }
     }
-    private void Spawn()
+    private async void Spawn()
     {
-      GameObject monster = _factory.CreateMonster(monsterType, transform);
+      GameObject monster = await _factory.CreateMonster(monsterType, transform);
       _enemyDeath = monster.GetComponent<EnemyDeath>();
       _enemyDeath.EnemyDead += Slay;
     }

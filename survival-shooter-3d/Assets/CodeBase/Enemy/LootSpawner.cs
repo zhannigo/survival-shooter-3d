@@ -18,13 +18,12 @@ namespace CodeBase.Enemy
       _gameFactory = gameFactory;
       _random = randomService;
     }
-    private void Start()
-    {
+    private void Start() => 
       EnemyDeath.EnemyDead += SpawnLoot;
-    }
-    private void SpawnLoot()
+
+    private async void SpawnLoot()
     {
-      LootPiece loot = _gameFactory.CreateLoot(transform.position);
+      LootPiece loot = await _gameFactory.CreateLoot(transform.position);
       Loot lootData = GenerateLoot();
       loot.Initialize(lootData);
     }

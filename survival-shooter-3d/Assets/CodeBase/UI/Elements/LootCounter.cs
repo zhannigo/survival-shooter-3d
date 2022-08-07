@@ -1,9 +1,8 @@
-﻿using System;
-using CodeBase.Data;
+﻿using CodeBase.Data;
 using TMPro;
 using UnityEngine;
 
-namespace CodeBase.UI
+namespace CodeBase.UI.Elements
 {
   public class LootCounter : MonoBehaviour
   {

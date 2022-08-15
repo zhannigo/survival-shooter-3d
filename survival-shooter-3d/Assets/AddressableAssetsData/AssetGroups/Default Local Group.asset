@@ -17,32 +17,32 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: fcbf067b4962b78458759e3acab2d184
   m_SerializeEntries:
-  - m_GUID: 1c90593862083af458fbc3981420059b
-    m_Address: Angry
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 32bf89218560c534da8659e6da74ffcf
+  - m_GUID: 663ffdbb29187134c93d6077dc9fcb85
     m_Address: Friendly
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 9246afe334495ac4f921afd4260b056b
-    m_Address: LootBrain
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: ff2f9e8eae5c53a459d30a30591d1263
-    m_Address: SpawnPoint
+  - m_GUID: 2a235c7e2f8c01d4cbf9dabfb6fdd7c0
+    m_Address: Angry
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 94fad7f7a66c401459d28201d1f5590e
     m_Address: Hud
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 1ac5b4c389b18d444afe300e701de400
+  - m_GUID: 922cc6fa502204d4fbfda9bd710d2191
+    m_Address: UIRoot
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 80d2ae647cb17744cbca60ce8c9138d1
+    m_Address: LootBrain
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 263b9317a19ea8b4ca8bfa136186913f
     m_Address: Hero
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 922cc6fa502204d4fbfda9bd710d2191
-    m_Address: UIRoot
+  - m_GUID: 75bea6c89a162ad43a2796b977958265
+    m_Address: SpawnPoint
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

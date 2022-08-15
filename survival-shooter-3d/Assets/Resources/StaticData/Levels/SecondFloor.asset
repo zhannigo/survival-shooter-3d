@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcc4d58a47224f54acacbb2c045bef80, type: 3}
+  m_Name: SecondFloor
+  m_EditorClassIdentifier: 
+  LevelKey: SecondFloor
+  Spawners:
+  - _id: SecondFloor_15d33291-5524-4c35-a38a-934370df41d0
+    _monsterType: 10
+    _position: {x: -6.88, y: 0, z: 9.65}
+  - _id: SecondFloor_3abaf908-41fb-421c-9def-b0228316a147
+    _monsterType: 0
+    _position: {x: 4.93, y: 0, z: -9.94}
+  - _id: SecondFloor_271ee4e0-d4da-4ddb-a615-f7f260b4b318
+    _monsterType: 0
+    _position: {x: -6.28, y: 0, z: -4.86}
+  InitialPointPosition: {x: -1.29, y: 0, z: -10.29}

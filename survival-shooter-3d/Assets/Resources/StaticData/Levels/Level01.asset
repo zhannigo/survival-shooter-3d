@@ -14,12 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelKey: Main
   Spawners:
-  - _id: Main_a5b28040-2204-4214-b463-a1ab5f568dd8
-    _monsterType: 0
-    _position: {x: -7.49, y: 0, z: -2.7}
+  - _id: Main_22e80f64-cab5-4473-bd87-4e12b307f649
+    _monsterType: 10
+    _position: {x: 0.69, y: 0, z: 3.01}
   - _id: Main_dc8ec4f4-736e-4fc0-9016-013ec7e732c0
     _monsterType: 10
-    _position: {x: 4.31, y: 0, z: 10.79}
-  - _id: Main_22e80f64-cab5-4473-bd87-4e12b307f649
+    _position: {x: 8.05, y: 0, z: 7.64}
+  - _id: Main_a5b28040-2204-4214-b463-a1ab5f568dd8
     _monsterType: 0
-    _position: {x: 1.08, y: 0, z: 0.63}
+    _position: {x: -11.48, y: 0, z: 7.71}
+  - _id: Main_29578c62-86ed-4355-af92-7fb9f69febb6
+    _monsterType: 0
+    _position: {x: -11.39, y: 0, z: -6.15}
+  InitialPointPosition: {x: -8.1, y: 0.6, z: -9.03}

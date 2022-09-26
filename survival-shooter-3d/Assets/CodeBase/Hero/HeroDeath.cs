@@ -11,6 +11,7 @@ namespace CodeBase.Hero
     public HeroAnimator _heroAnimator;
     public HeroAttack _heroAttack;
     public GameObject DeathFx;
+    public Action HeroDead;
     private bool _isDead = false;
 
     private void OnDestroy() => 
@@ -33,6 +34,7 @@ namespace CodeBase.Hero
       _heroAnimator.PlayDeath();
 
       Instantiate(DeathFx, transform.position, Quaternion.identity);
+      HeroDead?.Invoke();
     }
   }
 }

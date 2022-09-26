@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CodeBase.Cameralogic;
 using CodeBase.Hero;
@@ -46,15 +47,17 @@ namespace CodeBase.Infrastructure.States
       _sceneLoader.Load(sceneName, OnLoaded);
     }
 
-    public void Exit() => 
+    public void Exit()
+    {
       _curtain.Hide();
+    }
 
     private async void OnLoaded()
     {
       await InitUIRoot();
       await InitialGameWorld();
       InformProgressReaders();
-      _stateMachine.Enter<GameLoopState>();
+      _curtain.Hide();
     }
 
     private async Task InitUIRoot() => 
@@ -86,8 +89,11 @@ namespace CodeBase.Infrastructure.States
       }
     }
 
-    private async Task<GameObject> InitHero(LevelStaticData levelData) => 
-      await _gameFactory.HeroCreate(levelData.InitialPointPosition);
+    private async Task<GameObject> InitHero(LevelStaticData levelData)
+    {
+      var prefab = SkinsStaticData().Find(x => x._skinsType.ToString() == _progressService.Progress.SkinsData.selectedHero).Prefab;
+      return await _gameFactory.HeroCreate(prefab, levelData.InitialPointPosition);
+    }
 
     private async Task InitHud(GameObject hero)
     {
@@ -100,6 +106,11 @@ namespace CodeBase.Infrastructure.States
       var sceneKey = SceneManager.GetActiveScene().name;
       LevelStaticData levelData = _staticData.ForLevel(sceneKey);
       return levelData;
+    }
+    private List<SkinsStaticData> SkinsStaticData()
+    {
+      List<SkinsStaticData> skinsData = _staticData.HeroSkins();
+      return skinsData;
     }
 
     private void CameraFollow(GameObject hero) =>

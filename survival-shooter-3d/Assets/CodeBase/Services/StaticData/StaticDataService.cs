@@ -12,11 +12,13 @@ namespace CodeBase.Services.StaticData
     private const string StaticDataMonstersPath = "StaticData/Monsters";
     private const string StaticDataLevelsPath = "StaticData/Levels";
     private const string StaticDataUIWindowsPath = "StaticData/UI/WindowData";
+    private const string SkinsStaticDataPath = "StaticData/Hero";
     private Dictionary<MonsterTypeId, MonsterStaticData> _monsters;
     private Dictionary<string, LevelStaticData> _levels;
     private Dictionary<WindowId, WindowsConfig> _windowsConfigs;
+    private List<SkinsStaticData> _heroSkins;
 
-    public void LoadMonsters()
+    public void LoadStaticData()
     {
       _monsters = Resources.LoadAll<MonsterStaticData>(StaticDataMonstersPath)
         .ToDictionary(x => x.MonsterType, x => x);
@@ -25,6 +27,8 @@ namespace CodeBase.Services.StaticData
       _windowsConfigs = Resources.Load<WindowsStaticData>(StaticDataUIWindowsPath)
         .Configs
         .ToDictionary(x => x.WindowId, x => x);
+      _heroSkins = Resources.LoadAll<SkinsStaticData>(SkinsStaticDataPath)
+        .ToList();
     }
 
     public MonsterStaticData ForMonster(MonsterTypeId monsterTypeId)
@@ -47,5 +51,8 @@ namespace CodeBase.Services.StaticData
         ? config 
         : null;
     }
+
+    public List<SkinsStaticData> HeroSkins() => 
+      _heroSkins;
   }
 }

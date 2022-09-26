@@ -20,5 +20,11 @@ namespace CodeBase.Data
       Collected += loot;
       ChangedCollected?.Invoke();
     }
+
+    public void Subtract(int loot)
+    {
+      Collected -= loot;
+      ChangedCollected?.Invoke();
+    }
   }
 }

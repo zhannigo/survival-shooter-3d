@@ -57,7 +57,7 @@ namespace CodeBase.Infrastructure.States
       _services.RegisterSingle<IWindowService>(new WindowService(_services.Single<IUIFactory>()));
 
       _services.RegisterSingle<IGameFactory>(new GameFactory
-        (_services.Single<IAssets>(), staticData, randomService, progressService, _services.Single<IWindowService>()));
+        (_services.Single<IAssets>(), staticData, randomService, progressService, _services.Single<IWindowService>(),_stateMachine));
       _services.RegisterSingle<ISaveLoadService>(new SaveLoadService
         (_services.Single<IPersistentProgressService>(),_services.Single<IGameFactory>()));
     }
@@ -73,7 +73,7 @@ namespace CodeBase.Infrastructure.States
     {
       IStaticDataService staticData = new StaticDataService();
       _services.RegisterSingle(staticData);
-      staticData.LoadMonsters();
+      staticData.LoadStaticData();
       return staticData;
     }
 

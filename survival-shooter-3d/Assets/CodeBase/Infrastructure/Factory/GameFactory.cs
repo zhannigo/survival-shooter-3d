@@ -2,15 +2,18 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using CodeBase.Enemy;
 using CodeBase.Infrastructure.AssetManager;
+using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.States;
 using CodeBase.Logic;
 using CodeBase.Logic.EnemySpawners;
+using CodeBase.Logic.MenuLogic;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.StaticData;
 using CodeBase.StaticData;
 using CodeBase.UI.Elements;
 using CodeBase.UI.Services;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.AI;
 using Object = UnityEngine.Object;
 
@@ -23,17 +26,19 @@ namespace CodeBase.Infrastructure.Factory
     private readonly IRandomService _randomService;
     private IPersistentProgressService _progressService;
     private IWindowService _windowService;
+    private GameStateMachine _stateMachine;
     public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
     public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
     private GameObject HeroGameObject { get; set; }
 
-    public GameFactory(IAssets assets, IStaticDataService staticData, IRandomService randomService, IPersistentProgressService progressService, IWindowService windowService)
+    public GameFactory(IAssets assets, IStaticDataService staticData, IRandomService randomService, IPersistentProgressService progressService, IWindowService windowService, GameStateMachine stateMachine)
     {
       _assets = assets;
       _staticData = staticData;
       _randomService = randomService;
       _progressService = progressService;
       _windowService = windowService;
+      _stateMachine = stateMachine;
     }
 
     public async void WarmUp()
@@ -42,23 +47,39 @@ namespace CodeBase.Infrastructure.Factory
       await _assets.Load<GameObject>(AssetsAddress.SpawnPath);
     }
 
-    public async Task<GameObject> HeroCreate(Vector3 at)
+    public async Task<Transform> SkinsCreate(AssetReference assetPrefab, Vector3 position)
     {
-      GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.HeroPath);
+      GameObject prefab = await _assets.Load<GameObject>(assetPrefab);
+      return Object.Instantiate(prefab).transform;
+    }
+
+    public async Task<GameObject> HeroCreate(AssetReference assetReference, Vector3 at)
+    {
+      //GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.HeroPath);
+      GameObject prefab = await _assets.Load<GameObject>(assetReference);
       HeroGameObject = InstantiateRegistered(prefab, at);
       return HeroGameObject;
     }
 
-    public async Task<GameObject> CreateHud()
+    public async Task<GameObject> CreateMenuHud()
     {
-      GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.HudPath);
-      GameObject hud = InstantiateRegistered(prefab);
+      GameObject hud = await InitHud(AssetsAddress.MenuHudPath);
       hud.GetComponentInChildren<LootCounter>()
         .Construct(_progressService.Progress.WorldData.LootData);
-      foreach (OpenWindowButton windowButton in hud.GetComponentsInChildren<OpenWindowButton>())
-      {
-        windowButton.Construct(_windowService);
-      }
+      hud.GetComponentInChildren<PlayButton>()
+        .Construct(_progressService.Progress.WorldData.PositionOnLevel.Level, _stateMachine);
+      
+      GameObject skinService = await _assets.Load<GameObject>(AssetsAddress.BuySkinServicePath);
+      //InstantiateRegistered(skinService);
+      Object.Instantiate(skinService);
+      return hud;
+    }
+
+    public async Task<GameObject> CreateHud()
+    {
+      GameObject hud = await InitHud(AssetsAddress.HudPath);
+      hud.GetComponentInChildren<LootCounter>()
+        .Construct(_progressService.Progress.WorldData.LootData);
       return hud;
     }
 
@@ -108,6 +129,17 @@ namespace CodeBase.Infrastructure.Factory
         .GetComponent<LootPiece>();
       lootPiece.Construct(_progressService.Progress.WorldData);
       return lootPiece;
+    }
+
+    private async Task<GameObject> InitHud(string path)
+    {
+      GameObject prefab = await _assets.Load<GameObject>(path);
+      GameObject hud = InstantiateRegistered(prefab);
+      foreach (OpenWindowButton windowButton in hud.GetComponentsInChildren<OpenWindowButton>())
+      {
+        windowButton.Construct(_windowService);
+      }
+      return hud;
     }
 
     public void Cleanup()

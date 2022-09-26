@@ -21,7 +21,7 @@ namespace CodeBase.Infrastructure.States
     public void Enter()
     {
       LoadProgressOrInitNew();
-      _gameStateMachine.Enter<LevelLoadState, string>(_progressService.Progress.WorldData.PositionOnLevel.Level);
+      _gameStateMachine.Enter<MenuLoadState>();
     }
 
     public void Exit()
@@ -39,7 +39,9 @@ namespace CodeBase.Infrastructure.States
       progress.HeroState.MaxHP = 50;
       progress.HeroState.ReturnHp();
       progress.HeroStats.damage = 1;
-      progress.HeroStats.damageRadius = 1; 
+      progress.HeroStats.damageRadius = 1;
+      progress.SkinsData.selectedHero = "Hero";
+      progress.SkinsData.BuyingSkins.Add("Hero");
       return progress;
     }
   }

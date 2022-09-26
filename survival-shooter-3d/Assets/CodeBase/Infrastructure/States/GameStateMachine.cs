@@ -23,10 +23,13 @@ namespace CodeBase.Infrastructure.States
       {
         [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
         [typeof(LevelLoadState)] = new LevelLoadState(this, sceneLoader, curtain, services.Single<IGameFactory>(), 
-          services.Single<IPersistentProgressService>(), services.Single<IStaticDataService>(), services.Single<IUIFactory>()),
+          services.Single<IPersistentProgressService>(), services.Single<IStaticDataService>(), 
+          services.Single<IUIFactory>()),
         [typeof(LoadProgressState)] = new LoadProgressState(this, 
           services.Single<IPersistentProgressService>(), services.Single<ISaveLoadService>()),
-        [typeof(GameLoopState)] = new GameLoopState(this)
+        [typeof(MenuLoadState)] = new MenuLoadState(sceneLoader, services.Single<IUIFactory>(), curtain, 
+          services.Single<IGameFactory>(), services.Single<IStaticDataService>(), 
+          services.Single<IPersistentProgressService>())
       };
     }
 
